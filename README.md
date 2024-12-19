@@ -11,7 +11,7 @@ be installed from the <code>requirements.txt</code> file or running `pip install
 
 ```
 git clone git@github.com:ELIXIREstonia/fibar.git
-cd fibar
+cd fibar/scripts
 pip install -r requirements.txt || pip install -e . 
 ```
 
