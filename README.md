@@ -7,7 +7,7 @@ The goal of this project is to provide an automated microscopy image analysis to
 The fiber diameter measuring web tool is accessible to all [https://fibar.elixir.ut.ee/](https://fibar.elixir.ut.ee/)
 
 ## How to install and run the Python module
-The pipelines should be executed in the Python 3.8.10 environment (have not tested out other versions yet). All of the required libraries and their versions can
+The module should be executed in the Python 3.8.10 environment (have not tested out other versions yet). All of the required libraries and their versions can
 be installed from the <code>requirements.txt</code> file or running `pip install -e .`.
 
 ```
