@@ -10,7 +10,7 @@ The pipelines should be executed in the Python 3.8.10 environment (have not test
 be installed from the <code>requirements.txt</code> file or running `pip install -e .`.
 
 ```
-git clone https://gitlab.cs.ut.ee/elixir/fibar.git
+git clone git@github.com:ELIXIREstonia/fibar.git
 cd fibar
 pip install -r requirements.txt || pip install -e . 
 ```
