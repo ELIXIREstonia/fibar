@@ -1,0 +1,17 @@
+---
+- name: install tools
+  become: true
+  apt:
+    name: "{{item}}"
+    state: present
+    update_cache: yes
+    force_apt_get: yes
+  with_items:
+    - curl
+    - vim
+    - git
+    - apt-transport-https
+    - ca-certificates
+    - software-properties-common
+    - build-essential
+    - autossh

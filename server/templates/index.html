@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  
+    <p class="text-left">This is the FiBar diameter measuring tool. </p>
+    <p>Insert a scanning electron microscopy (SEM) iage (accepted PNG/JPG/TIF format, max 2MB). The iages are expected to contain fibers, stay in magnification between 500 and 20000 and have a scale in the lower left corner of the image. <br>
+      It is also expected for the uploaded file name to include the respective magnification used, as this enables to extract fibers from the image correctly.
+      All of the constraints of this tool are provided <a href="https://gitlab.cs.ut.ee/elixir/fibar.git">here</a>. Some example images are provided below.<br>
+
+      <div class="upload-form">
+        <form action = "/uploader" method = "POST" 
+          enctype = "multipart/form-data">
+          <input type = "file" name = "file" />
+          <label for="integer_value">Amount of measurements:</label>
+          <input type="number" name="integer_value" id="integerValue" min="0" max="100" value="50">
+        <br>
+
+          <input type = "submit" value="Analyse image"/>
+        </form>
+      </div>
+    
+      <p>Link to <a href="https://gitlab.cs.ut.ee/elixir/fibar.git" target="_new">Package Github repository</a></p>
+      <p>The FiBar tool is actively improved and updated. This tool also has a bacteria counting pipeline which is under development. <br> 
+        The tool has been created in collaboration with the Kogermann Lab at the Institute of Pharmacy of the University of Tartu. </p>
+    </p>
+
+{% endblock %}

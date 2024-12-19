@@ -1,0 +1,57 @@
+---
+- hosts: demo
+
+  tasks:
+    - name: update code to HEAD
+      git:
+        repo: git@gitlab.cs.ut.ee:elixir/fibar.git
+        dest: /home/ubuntu/fibar
+        accept_hostkey: yes
+        update: yes
+        force: yes
+        version: dev/improved-version
+
+    - name: Ensure space on disk
+      block:
+        - name: Ensure that free space on the tested volume is greater than 30%
+          assert:
+            that:
+              - mount.size_available > mount.size_total|float * 0.3
+            msg: Disk space has reached 30% threshold
+          vars:
+            mount: "{{ ansible_mounts | selectattr('mount','equalto',item) | list | first }}"
+          with_items:
+            - /
+
+      rescue:
+        - name: prune images
+          become: yes
+          command: "docker image prune -a -f"
+
+        - name: prune containers
+          become: yes
+          command: "docker container prune -f"
+
+        - name: prune volumes
+          become: yes
+          command: "docker volume prune -f"
+
+        - name: prune networks
+          become: yes
+          command: "docker network prune -f"
+
+
+    - name: build the container
+      become: yes
+      shell: 'docker build -t fibar:latest .'
+      args:
+        chdir: /home/ubuntu/fibar
+        executable: /bin/bash
+
+
+    - name: stop previous and run the container
+      become: yes
+      shell: '(docker rm --force demo || true) && sudo docker run -d --name demo -p 80:80 -v /data:/data:ro --restart=always fibar:latest'
+      args:
+        chdir: /home/ubuntu/fibar
+        executable: /bin/bash
